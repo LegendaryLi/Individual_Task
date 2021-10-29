@@ -1,0 +1,47 @@
+/*
+
+1.	Решить следующую задачу с использованием класса Stack:
+Вывести на экран содержимое текстового файла t, выписывая литеры(символы) каждой его строки в обратном порядке.
+
+*/
+
+
+using System;
+using System.Collections;
+using System.IO;
+
+namespace ConsoleApp5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+		//Проверка
+
+            string[] strok = File.ReadAllLines("t.txt");
+
+            if (strok.Length == 0)
+            {
+                Console.WriteLine("Файл пуст");
+            }
+            else
+            {
+                Console.WriteLine("В файле {0} строк", strok.Length);
+            }
+            Console.ReadLine();
+
+            var f = File.ReadAllLines("t.txt");
+            foreach (var s in f)
+            {
+                var stack = new Stack();
+                foreach (var c in s)
+                    stack.Push(c);
+                var count = stack.Count;
+                for (var i = 0; i < count; i++)
+                    Console.Write(stack.Pop());
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
+    }
+}
