@@ -1,0 +1,40 @@
+/*
+
+Решить следующие задачи с использованием класса Queue: 
+2. Дан файл, содержащий числа. 
+За один просмотр файла напечатать элементы файла в следующем порядке: 
+сначала все числа, из интервала [a,b], потом все числа, меньшие a, потом все числа, большие b, сохраняя исходный порядок в каждой группе чисел.
+
+*/
+
+
+using System;
+using System.Collections;
+using System.IO;
+
+int a=1;
+Console.Write("Введите B:");
+double b = Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("Вы ввели число:"+b);
+
+Queue<int> fromAToB = new Queue<int>();
+Queue<int> lessThenA = new Queue<int>();
+Queue<int> moreThenB = new Queue<int>();
+
+int number;
+using (StreamReader reader = new StreamReader(@"d:\1.txt", Encoding.Default))
+{
+    while (!reader.EndOfStream)
+    {
+        number = int.Parse(reader.ReadLine());
+        if (number < a)
+            lessThenA.Enqueue(number);
+        else if (number>b)
+            moreThenB.Enqueue(number);
+        else
+            fromAToB.Enqueue(number);
+    }
+}
+Console.WriteLine(string.Join(" ", fromAToB));
+Console.WriteLine(string.Join(" ", lessThenA));
+Console.WriteLine(string.Join(" ", moreThenB));
